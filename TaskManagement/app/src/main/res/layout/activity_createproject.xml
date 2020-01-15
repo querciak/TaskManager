@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            android:windowSoftInputMode="adjustNothing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@android:color/white">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/new_project"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="154dp"
+                tools:layout_editor_absoluteY="18dp" />
+
+            <TextView
+                android:id="@+id/saveProject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:linksClickable="true"
+                android:text="SAVE"
+                android:textColor="@android:color/white"
+                android:textSize="16dp"
+                tools:layout_editor_absoluteX="154dp"
+                tools:layout_editor_absoluteY="18dp" />
+
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/todo"
+                app:srcCompat="@drawable/whiteclose" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/project_icon"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/common_google_signin_btn_text_dark_disabled"
+            android:windowSoftInputMode="adjustNothing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.013"
+            app:layout_constraintVertical_weight="0.2"
+            app:srcCompat="@drawable/folder" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Project icon"
+            android:windowSoftInputMode="adjustNothing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/project_icon"
+            app:layout_constraintVertical_weight="0.08" />
+
+        <EditText
+            android:id="@+id/project_name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_weight="0.12" />
+
+        <EditText
+            android:id="@+id/project_description"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:hint="Description"
+            android:inputType="textShortMessage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/project_name"
+            app:layout_constraintVertical_weight="0.12" />
+
+        <TextView
+            android:id="@+id/newTaskTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:hint="Deadline"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/deadline"
+            app:layout_constraintEnd_toStartOf="@+id/deadline"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="dd/mm/yyyy"
+            android:inputType="date"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/project_description"
+            app:layout_constraintStart_toStartOf="@+id/project_description"
+            app:layout_constraintTop_toBottomOf="@+id/project_description" />
+
+        <EditText
+            android:id="@+id/keywords"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="60dp"
+            android:ems="10"
+            android:hint="Add keywords"
+            android:inputType="textPersonName"
+            android:windowSoftInputMode="adjustNothing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.257"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupCheckBox"
+            app:layout_constraintVertical_bias="0.274"
+            app:layout_constraintVertical_weight="0.12" />
+
+        <TextView
+            android:id="@+id/addKeyword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:hint="ADD"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/keywords"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/keywords"
+            app:layout_constraintTop_toTopOf="@+id/keywords" />
+
+        <TextView
+            android:id="@+id/key1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:visibility="invisible"
+            app:layout_constraintBaseline_toBaselineOf="@+id/key2"
+            app:layout_constraintEnd_toStartOf="@+id/key2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/key2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/key3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/key1"
+            app:layout_constraintTop_toBottomOf="@+id/keywords"
+            app:layout_constraintVertical_weight="0.1" />
+
+        <TextView
+            android:id="@+id/key3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:visibility="invisible"
+            app:layout_constraintBaseline_toBaselineOf="@+id/key2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/key2" />
+
+        <CheckBox
+            android:id="@+id/groupCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Group Project"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deadline"
+            app:layout_constraintVertical_weight="0.1" />
+
+        <TextView
+            android:id="@+id/textViewProjectType"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="Leave blank to create personal project."
+            app:layout_constraintBaseline_toBaselineOf="@+id/groupCheckBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/groupCheckBox" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

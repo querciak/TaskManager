@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "66972708758",
+    "firebase_url": "https://mcc-fall-2019-g04.firebaseio.com",
+    "project_id": "mcc-fall-2019-g04",
+    "storage_bucket": "mcc-fall-2019-g04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66972708758:android:f6e2a3055da135e4b7f7b7",
+        "android_client_info": {
+          "package_name": "team4.aalto.fi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66972708758-vt8eepi4f1m425kh67tbrvh5b9pigfo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "team4.aalto.fi",
+            "certificate_hash": "926c9bada7d206a37bd1bd11bc6c92bde6ec34cb"
+          }
+        },
+        {
+          "client_id": "66972708758-go75sqdejm19kig6d2cmhtvrqjde6ob1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "team4.aalto.fi",
+            "certificate_hash": "663f92d9fe23f5cd50d488c46dd0f885afbeaf11"
+          }
+        },
+        {
+          "client_id": "66972708758-ofi3ti4jsjc1h59bp7bpade0sbc7aska.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoNz96tuD3rkuYNzsiN0QXvM-WUnG9zwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66972708758-ofi3ti4jsjc1h59bp7bpade0sbc7aska.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

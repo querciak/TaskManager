@@ -1,0 +1,36 @@
+# /etc/gitlab-runner/config.toml
+concurrent = 1
+check_interval = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  name = "amazon-ec2-1gb-2"
+  url = "https://version.aalto.fi/gitlab/"
+  token = "VgWfEMqbxPLbW4TDN5TE"
+  executor = "docker"
+  [runners.custom_build_dir]
+  [runners.docker]
+    tls_verify = false
+    image = "docker:19.03.1"
+    privileged = true
+    disable_entrypoint_overwrite = false
+    oom_kill_disable = false
+    disable_cache = false
+    volumes = ["/cache"]
+    shm_size = 0
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]
+
+[[runners]]
+  name = "google-4gb-shell"
+  url = "https://version.aalto.fi/gitlab/"
+  token = "oWNzLf1xN_NBdKQdu7Yx"
+  executor = "shell"
+  [runners.custom_build_dir]
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]
+

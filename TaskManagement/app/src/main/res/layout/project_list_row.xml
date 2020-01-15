@@ -1,0 +1,130 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="6dp">
+
+
+    <ImageView
+        android:id="@+id/memberPicture3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="4dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/memberPicture2"
+        app:layout_constraintEnd_toStartOf="@+id/memberPicture2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imgHasFiles"
+        app:layout_constraintTop_toTopOf="@+id/memberPicture2"
+        app:srcCompat="@drawable/img_circle_shape"
+        tools:srcCompat="@drawable/img_circle_shape" />
+
+    <ImageView
+        android:id="@+id/projectPicture"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mr_button_connected_light"
+        tools:srcCompat="@tools:sample/avatars[0]" />
+
+    <TextView
+        android:id="@+id/projectTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:text="@string/menuProjectTitle"
+        android:textColor="#000000"
+        app:layout_constraintStart_toEndOf="@+id/projectPicture"
+        app:layout_constraintTop_toTopOf="@+id/projectPicture" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/modified"
+        app:layout_constraintStart_toStartOf="@+id/projectTitle"
+        app:layout_constraintTop_toBottomOf="@+id/projectTitle" />
+
+    <TextView
+        android:id="@+id/projectMenuOptions"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/dotsMenu"
+        android:textAppearance="?android:textAppearanceLarge"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/projectPicture" />
+
+    <ImageView
+        android:id="@+id/isProjectFavorite"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/projectPicture"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:drawable/btn_star" />
+
+    <TextView
+        android:id="@+id/lastModification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <ImageButton
+        android:id="@+id/imgHasFiles"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/isProjectFavorite"
+        app:layout_constraintStart_toEndOf="@+id/isProjectFavorite"
+        app:layout_constraintTop_toTopOf="@+id/isProjectFavorite"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/sym_contact_card" />
+
+    <ImageView
+        android:id="@+id/memberPicture1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/projectMenuOptions"
+        app:layout_constraintStart_toStartOf="@+id/projectMenuOptions"
+        app:layout_constraintTop_toBottomOf="@+id/projectMenuOptions"
+        app:srcCompat="@drawable/img_circle_shape"
+        tools:srcCompat="@drawable/img_circle_shape" />
+
+    <ImageView
+        android:id="@+id/memberPicture2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="4dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/memberPicture1"
+        app:layout_constraintEnd_toStartOf="@+id/memberPicture1"
+        app:layout_constraintTop_toTopOf="@+id/memberPicture1"
+        app:srcCompat="@drawable/img_circle_shape"
+        tools:srcCompat="@drawable/img_circle_shape" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

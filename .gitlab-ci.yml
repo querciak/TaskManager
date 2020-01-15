@@ -1,0 +1,162 @@
+stages:
+  - setup
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2  # Improves performance.
+  APP_DIR: TaskManagement
+  IMAGE_NAME: $REGISTRY_NAME/android-environment
+  DEPLOY_IMAGE: $REGISTRY_NAME/ubuntu-rclone
+  APK_NAME_STAGING: app_${CI_COMMIT_SHORT_SHA}
+  APK_DIR_STAGING: app/build/outputs/apk/debug
+  APK_NAME_RELEASE: app_${CI_COMMIT_TAG}
+  APK_DIR_RELEASE: app/build/outputs/apk/release
+  KEYSTORE_FILE: ci-cd/Dockerfiles/android/group4-release-key-pkcs12.jks
+
+# Here we build the docker image used by all the other jobs
+Build docker image android:
+  stage: setup
+  image: docker:19.03.1
+  # Docker-in-Docker service is required to build Docker images.
+  services:
+    - docker:19.03.1-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  tags:
+  - kotlin
+  script:
+    - docker info
+    - docker login -u $REGISTRY_USER -p $REGISTRY_TOKEN $REGISTRY_HOST
+    - docker pull $IMAGE_NAME
+    - docker build --cache-from $IMAGE_NAME -t $IMAGE_NAME ci-cd/Dockerfiles/android
+    - docker push $IMAGE_NAME
+
+# Here we build the docker image which deploys the apk
+Build docker image rclone:
+  stage: setup
+  image: docker:19.03.1
+  # Docker-in-Docker service is required to build Docker images.
+  services:
+    - docker:19.03.1-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  tags:
+  - kotlin
+  script:
+    - docker info
+    - docker login -u $REGISTRY_USER -p $REGISTRY_TOKEN $REGISTRY_HOST
+    - docker pull $DEPLOY_IMAGE
+    - docker build --cache-from $DEPLOY_IMAGE -t $DEPLOY_IMAGE ci-cd/Dockerfiles/rclone
+    - docker push $DEPLOY_IMAGE
+
+# triggered when we push to master branch
+build-code-staging:
+  stage: build
+  image: $IMAGE_NAME:latest
+  tags:
+    - kotlin
+  before_script:
+    - export GRADLE_USER_HOME=$(pwd)/.gradle
+    - export ANDROID_SDK_HOME=$(pwd)
+    - cd $APP_DIR
+    - chmod +x ./gradlew
+  script:
+    - ./gradlew assembleDebug
+  cache:
+    key: ${CI_PROJECT_ID}
+    paths:
+      - .gradle/
+  artifacts:
+    paths:
+    - $APP_DIR/$APK_DIR_STAGING/*.apk
+    expire_in: 1 week
+  only:
+    - master
+
+# triggered when we create a tag or release
+build-code-production:
+  stage: build
+  image: $IMAGE_NAME:latest
+  tags:
+    - kotlin
+  before_script:
+    - export GRADLE_USER_HOME=$(pwd)/.gradle
+    - export ANDROID_SDK_HOME=$(pwd)
+    - cd $APP_DIR
+    - chmod +x ./gradlew
+  script:
+    - ./gradlew assembleRelease
+    - zipalign -v -p 4 $APK_DIR_RELEASE/app-release-unsigned.apk $APK_DIR_RELEASE/app-release-unsigned-aligned.apk
+    - apksigner sign --ks $KEYSTORE_FILE --out $APK_DIR_RELEASE/app-release.apk --ks-pass pass:$KEYSTORE_PASS $APK_DIR_RELEASE/app-release-unsigned-aligned.apk
+    - apksigner verify $APK_DIR_RELEASE/app-release.apk
+  cache:
+    key: ${CI_PROJECT_ID}
+    paths:
+      - .gradle/
+  artifacts:
+    paths:
+    - $APP_DIR/$APK_DIR_RELEASE/*.apk
+    expire_in: 1 week
+  only:
+    - tags
+
+# run unit tests
+run-unit-tests:
+  stage: test
+  image: $IMAGE_NAME:latest
+  tags:
+    - kotlin
+  before_script:
+    - export GRADLE_USER_HOME=$(pwd)/.gradle
+    - export ANDROID_SDK_HOME=$(pwd)
+    - cd $APP_DIR
+    - chmod +x ./gradlew
+  script:
+    - ./gradlew -Pci --console=plain :app:testDebug
+  cache:
+    key: ${CI_PROJECT_ID}
+    paths:
+      - .gradle/
+
+# triggered when we push to master branch
+deploy-staging:
+  stage: deploy
+  image: $DEPLOY_IMAGE:latest
+  tags:
+    - kotlin
+  before_script:
+    - cd $APP_DIR
+  script:
+    - export COMMIT_TIME=$(git show -s --format=%cI $CI_COMMIT_SHA)
+    - export APK_NAME=${APK_NAME_STAGING}_${COMMIT_TIME}.apk
+    - export APK_DIR=$APK_DIR_STAGING
+    - mv $APK_DIR/app-debug.apk $APK_DIR/$APK_NAME
+    - rclone copy $APK_DIR/$APK_NAME aalto-google-drive:apk/mcc-project/staging
+    - mv $APK_DIR/$APK_NAME $APK_DIR/app_debug_latest.apk
+    - rclone sync $APK_DIR/app_debug_latest.apk aalto-google-drive:apk/mcc-project/staging
+  only:
+    - master
+
+# triggered when we create a tag or release
+deploy-production:
+  stage: deploy
+  image: $DEPLOY_IMAGE:latest
+  tags:
+    - kotlin
+  before_script:
+    - cd $APP_DIR
+  script:
+    - export APK_NAME=${APK_NAME_RELEASE}.apk
+    - export APK_DIR=$APK_DIR_RELEASE
+    - mv $APK_DIR/app-release.apk $APK_DIR/$APK_NAME
+    - rclone copy $APK_DIR/$APK_NAME aalto-google-drive:apk/mcc-project/release
+    - mv $APK_DIR/$APK_NAME $APK_DIR/app_release_latest.apk
+    - rclone sync $APK_DIR/app_release_latest.apk aalto-google-drive:apk/mcc-project/staging
+  only:
+    - tags

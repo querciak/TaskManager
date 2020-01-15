@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">TaskManagement</string>
+    <string name="close">close</string>
+    <string name="save">save</string>
+
+    <string name="go_to_register">register now</string>
+    <string name="register_username">Username</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password</string>
+    <string name="register_rep_pass">Repeat password</string>
+    <string name="register_reg_button">Create account</string>
+    <string name="existing_username">Name already chosen</string>
+    <string name="existing_email">Email already registered</string>
+    <string name="same_password">Passwords do not match</string>
+    <string name="length_password">Minimum length of password is 6</string>
+
+    <string name="home_nav_favorites">Favorites</string>
+    <string name="home_nav_listed">Listed</string>
+    <string name="home_nav_recent">Recent</string>
+
+    <string name="list_project_list">All projects</string>
+    <string name="menuProjectTitle">Title</string>
+    <string name="modified">Modified: </string>
+    <string name="dotsMenu">⋮</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="search_project">project name or keyword</string>
+    <string name="menu_delete_project">Delete</string>
+    <string name="menu_project_content">Content</string>
+    <string name="menu_project_report">Generate report</string>
+
+    <string name="new_project">New project</string>
+    <string name="todo">TODO</string>
+
+    <string name="tab_text_tasks">TASKS</string>
+    <string name="tab_text_pictures">PICTURES</string>
+    <string name="tab_text_files">FILES</string>
+    <string name="menu">menu</string>
+
+    <string name="fcm_message_title">Task Manager Notification</string>
+    <string name="fcm_message_body_new_task">You have been assigned to a new task</string>
+    <string name="fcm_message_body_new_project">You have been assigned to a new project</string>
+    <string name="fcm_message_body_task_deadline">Your task deadline is in 1 day</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tittle_settings">Settings</string>
+    <string name="profile_toolbar">Profile Settings</string>
+    <string name="old_pass">Old Password</string>
+    <string name="new_pass">New Password</string>
+    <string name="repeat_new_pass">Repeat New Password</string>
+    <string name="save_button">Save Changes</string>
+    <string name="image_quality">Image Quality</string>
+    <string name="menu_project_members">Add Members</string>
+
+</resources>

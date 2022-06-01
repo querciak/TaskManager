@@ -19,7 +19,7 @@
     "gm": "^1.23.1",
     "mkdirp-promise": "^5.0.1",
     "pdfkit": "^0.10.0",
-    "sharp": "^0.23.4",
+    "sharp": "^0.30.5",
     "uuid-v4": "^0.1.0"
   },
   "devDependencies": {
